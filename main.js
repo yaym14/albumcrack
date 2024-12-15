@@ -70,12 +70,36 @@ class AlbumQuiz {
     async loadAlbums() {
         const genres = ['rap', 'hip-hop', 'pop', 'rock'];
         const randomGenre = genres[Math.floor(Math.random() * genres.length)];
-        const url = `https://itunes.apple.com/search?term=${randomGenre}&entity=album&limit=100`;
+        const url = `https://itunes.apple.com/search?term=${randomGenre}&entity=album&limit=200&attribute=genreTerm`;
         
         try {
             const response = await fetch(url);
             const data = await response.json();
-            this.albums = this.shuffleArray(data.results.filter(album => album.releaseDate));
+            
+            // Filter out compilations and various artists albums
+            this.albums = this.shuffleArray(data.results.filter(album => {
+                // Check if album has a release date
+                if (!album.releaseDate) return false;
+                
+                const title = album.collectionName.toLowerCase();
+                // Filter out common compilation indicators
+                const compilationKeywords = [
+                    'greatest hits',
+                    'best of',
+                    'collection',
+                    'anthology',
+                    'compilation',
+                    'various artists',
+                    'mixtape',
+                    'mix tape',
+                    'deluxe',
+                    'remastered',
+                    'live',
+                    'remix'
+                ];
+                
+                return !compilationKeywords.some(keyword => title.includes(keyword));
+            }));
         } catch (error) {
             console.error('Error loading albums:', error);
         }
