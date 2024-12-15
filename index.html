@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Crack - Music Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <div id="welcome-screen">
+        <h1 class="animate__animated animate__bounceIn">Album Crack</h1>
+        <div class="welcome-content animate__animated animate__fadeIn">
+            <p>Test your music knowledge!</p>
+            <input type="text" id="username-input" placeholder="Enter your username" maxlength="20">
+            <button id="start-button" disabled>Start Quiz</button>
+        </div>
+    </div>
+
+    <div id="countdown" class="hidden">
+        <div class="countdown-number animate__animated"></div>
+    </div>
+
+    <div id="quiz-container" class="hidden">
+        <div id="score-display">
+            <span>Score: <span id="current-score">0</span></span>
+            <span>Question: <span id="question-count">1</span>/15</span>
+        </div>
+
+        <div id="album-display">
+            <img id="album-cover" src="" alt="Album Cover">
+            <h2 id="album-title"></h2>
+        </div>
+
+        <div id="question-area">
+            <div class="question-block">
+                <h3>What year was this album released?</h3>
+                <div id="year-options" class="options-grid"></div>
+            </div>
+            
+            <div class="question-block">
+                <h3>What genre is this album?</h3>
+                <div id="genre-options" class="options-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="finish-screen" class="hidden">
+        <div class="score-animation">
+            <h2>Final Score</h2>
+            <div id="final-score" class="counting-number">0</div>
+        </div>
+        <button id="leaderboard-button">View Leaderboard</button>
+    </div>
+
+    <div id="leaderboard-screen" class="hidden">
+        <h2>Top Scores</h2>
+        <div id="leaderboard-entries"></div>
+        <button id="play-again-button">Play Again</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
